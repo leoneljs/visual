@@ -1,0 +1,91 @@
+
+
+'NO...1 CONEXION
+crear clase conexion
+
+imports system.data.sqlcliente
+imports system.data.sqlcliente
+' conexion a base de datos desde visual basic
+
+
+'variable de clase'
+public cn as sqlconnection
+
+'constructor'
+sub new()
+try 
+cn=new sqlconnection( )
+cn.open()
+msgbox("conexion establecida",vbInformation)
+catch ex as exception
+msgbox("conexion no establecida"+ex.toString)
+end sub
+
+'codigo para furmulario
+'crear instancia de la clase conexion
+
+public conn as new conexion
+
+
+
+'NO......2 CREAR UN INSERT por medio de sp'
+
+create procedure sp_insertar
+@pais
+
+as
+insert into pais (pais)
+values(@pais)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+'PROCEDIMIENTO QUE INSERTE A LA BASE DE DATOS
+'LOS DATOS ENVIADOS DESDE VISUAL BASIC'
+
+'CREAR UNA FUNCION'
+
+public cmd as sqlcommand
+function insertar(byval id string ,byval nombre string)
+dim salida as string="se inserto correctamente"
+try
+cmd=new sqlcommand("sp_pais",cn)
+cmd.commantype=commantype.storeProcedure
+witch cmd.parameters
+add.witchvalue("@id",id)
+add.witchvalue("pais",pais)
+end witch
+cmd.executeNonQuery()
+catch ex as exception
+
+end try
+
+return salida
+
+
+end function
+
+
+
+'nos vamos al boton insertar'
+
+conn.insertar(txtid.text,txtpais.text)
+
+
+
+
+
+
+
+
